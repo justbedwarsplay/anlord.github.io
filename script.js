@@ -227,14 +227,40 @@ if (!isTouch && !prefersReduced) {
 }
 
 /* ---------------------------------------------------------------------
-   7. Technologies — render floating badges
+   7. Technologies — render floating badges with brand icons
    --------------------------------------------------------------------- */
+/* Inline SVG brand glyphs (24x24, currentColor) keyed by technology name.
+   Fallback: a small generic chip icon. */
+const TECH_ICONS = {
+  "Java": '<svg viewBox="0 0 24 24" fill="none"><path d="M12 2C7.6 2 4 3.4 4 5.2V16c0 1.8 3.6 3.2 8 3.2s8-1.4 8-3.2V5.2C20 3.4 16.4 2 12 2Z" stroke="currentColor" stroke-width="1.4"/><path d="M4 9c0 1.6 3.6 2.8 8 2.8s8-1.2 8-2.8M4 13.2c0 1.6 3.6 2.8 8 2.8s8-1.2 8-2.8" stroke="currentColor" stroke-width="1.2" opacity=".5"/><path d="M8.5 6.5l2 1M14 6.8l-1.4 1.2M9 10.5h3l-1.5 1.2" stroke="currentColor" stroke-width="1"/></svg>',
+  "Kotlin": '<svg viewBox="0 0 24 24" fill="none"><path d="M4 4h11l-1 2.2 5.8 5.8L15 18l1 2H4V4Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M9 9l5 6M14 9l-5 6" stroke="currentColor" stroke-width="1"/></svg>',
+  "Python": '<svg viewBox="0 0 24 24" fill="none"><path d="M12 3c-3.3 0-5 1.3-5 3.4V9h5v1.3H6.5C4.4 10.3 3 11.9 3 14.5 3 18 5.2 19 8 19c2 0 3.2-.6 4.2-1.8L12 19h4l-1-3.3c2.4-.3 4-2 4-4.7 0-2.6-1.8-4-5-4h-2V6.4C12 5 12.8 4.4 14 4.4c.8 0 1.4.2 1.9.5" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/><path d="M9 7.5h2M9 14.5h2" stroke="currentColor" stroke-width="1"/></svg>',
+  "C": '<svg viewBox="0 0 24 24" fill="none"><path d="M9 8.5c1.6-1 3.4-1.4 5.2-1.4 2 0 3.3.9 3.3 2.4 0 3.6-7.5 1.8-7.5 6 0 1.8 1.7 2.8 3.9 2.8 1.9 0 3.7-.6 5.2-1.7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M14.5 6.5v11" stroke="currentColor" stroke-width="1.5"/></svg>',
+  "C++": '<svg viewBox="0 0 24 24" fill="none"><path d="M9 8.5c1.6-1 3.4-1.4 5.2-1.4 2 0 3.3.9 3.3 2.4 0 3.6-7.5 1.8-7.5 6 0 1.8 1.7 2.8 3.9 2.8 1.9 0 3.7-.6 5.2-1.7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M14.5 6.5v11" stroke="currentColor" stroke-width="1.5"/><path d="M3 9.5v5M3 12h0M1.6 11v2M4.4 11v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>',
+  "Rust": '<svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="8" stroke="currentColor" stroke-width="1.4"/><circle cx="12" cy="12" r="3" fill="currentColor"/><path d="M12 4v3M12 17v3M4 12h3M17 12h3M6.5 6.5l2 2M15.5 15.5l2 2M17.5 6.5l-2 2M8.5 15.5l-2 2" stroke="currentColor" stroke-width="1.2"/></svg>',
+  "JavaScript": '<svg viewBox="0 0 24 24" fill="none"><rect x="3" y="3.5" width="18" height="17" rx="2.5" stroke="currentColor" stroke-width="1.4"/><path d="M9.5 16.5c0 .9-.7 1.3-1.6 1.3-1 0-1.6-.4-2-1.1M14 11.5c.3-1.2 1.1-1.7 2.2-1.6 1.4.1 2 .9 1.9 2.1-.1 1.4-1 2.1-2.6 2.8-1.3.6-1.8 1-1.7 1.8.1.7.7 1.1 1.6 1.1.9 0 1.5-.4 2-1.3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>',
+  "HTML": '<svg viewBox="0 0 24 24" fill="none"><path d="M5 4h5.5l1.7 4.5L13.5 4H19l-3 14-3.3-1-1-3-1 3L7.7 18 5 4Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>',
+  "CSS": '<svg viewBox="0 0 24 24" fill="none"><path d="M5 4h5.5l1.7 4.5L13.5 4H19l-3 14-3.3-1-1-3-1 3L7.7 18 5 4Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/><path d="M9.5 11h2.4l1.2 3.2L14.3 11" stroke="currentColor" stroke-width="1.1" opacity=".6"/></svg>',
+  "Three.js": '<svg viewBox="0 0 24 24" fill="none"><path d="M12 3 21 8v8l-9 5-9-5V8l9-5Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/><path d="M12 3v18M3 8l9 5 9-5M12 11.5 21 16M12 11.5 3 16" stroke="currentColor" stroke-width="1" opacity=".5"/></svg>',
+  "Spigot": '<svg viewBox="0 0 24 24" fill="none"><path d="M12 3v3M12 18v3M3 12h3M18 12h3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><circle cx="12" cy="12" r="4.5" stroke="currentColor" stroke-width="1.4"/><circle cx="12" cy="12" r="1.4" fill="currentColor"/></svg>',
+  "Paper": '<svg viewBox="0 0 24 24" fill="none"><path d="M6 3h8l4 4v14H6V3Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M14 3v4h4M8.5 11h7M8.5 14.5h7M8.5 18h4" stroke="currentColor" stroke-width="1.1" opacity=".6"/></svg>',
+  "PacketEvents": '<svg viewBox="0 0 24 24" fill="none"><rect x="3.5" y="8" width="11" height="8" rx="1.5" stroke="currentColor" stroke-width="1.4"/><path d="M14.5 11h4l2 2v3h-6" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><circle cx="7" cy="12" r="1.2" fill="currentColor"/></svg>',
+  "Telegram API": '<svg viewBox="0 0 24 24" fill="none"><path d="M21 5 4 12l5 2 2 5 3-4 4 3 3-13Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M9 14l7-7" stroke="currentColor" stroke-width="1.1" opacity=".6"/></svg>',
+  "PyTorch": '<svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="9" r="5" stroke="currentColor" stroke-width="1.4"/><path d="M9 13c-2 1-3 3-3 5M15 13c2 1 3 3 3 5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><path d="M12 4v0" stroke="currentColor" stroke-width="1.4"/></svg>',
+  "Git": '<svg viewBox="0 0 24 24" fill="none"><circle cx="6" cy="6" r="2.3" stroke="currentColor" stroke-width="1.4"/><circle cx="6" cy="18" r="2.3" stroke="currentColor" stroke-width="1.4"/><circle cx="18" cy="9" r="2.3" stroke="currentColor" stroke-width="1.4"/><path d="M6 8.3v7.4M6 12h8a4 4 0 0 0 0-8" stroke="currentColor" stroke-width="1.4"/></svg>',
+  "GitHub": '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-3.2 19.5c.5.1.7-.2.7-.5v-1.7c-2.8.6-3.4-1.3-3.4-1.3-.5-1.2-1.1-1.5-1.1-1.5-.9-.6.1-.6.1-.6 1 .1 1.5 1 1.5 1 .9 1.5 2.3 1.1 2.9.8.1-.6.3-1.1.6-1.3-2.2-.300000-4.6-1.1-4.6-4.9 0-1.1.4-2 1-2.7-.1-.3-.4-1.3.1-2.7 0 0 .8-.3 2.7 1a9.3 9.3 0 0 1 5 0c1.9-1.3 2.7-1 2.7-1 .5 1.4.2 2.4.1 2.7.6.7 1 1.6 1 2.7 0 3.8-2.4 4.6-4.6 4.9.4.3.7 1 .7 1.9v2.8c0 .3.2.6.7.5A10 10 0 0 0 12 2Z"/></svg>',
+  "Gradle": '<svg viewBox="0 0 24 24" fill="none"><path d="M5 5h14v14H5V5Z" stroke="currentColor" stroke-width="1.4"/><path d="M8 8v8M12 8v8M16 8v8" stroke="currentColor" stroke-width="1.2"/><path d="M8 12h8" stroke="currentColor" stroke-width="1.2"/></svg>',
+  "Docker": '<svg viewBox="0 0 24 24" fill="none"><rect x="3" y="10" width="3" height="3" stroke="currentColor" stroke-width="1.2"/><rect x="6.5" y="10" width="3" height="3" stroke="currentColor" stroke-width="1.2"/><rect x="10" y="10" width="3" height="3" stroke="currentColor" stroke-width="1.2"/><rect x="13.5" y="10" width="3" height="3" stroke="currentColor" stroke-width="1.2"/><rect x="6.5" y="6.5" width="3" height="3" stroke="currentColor" stroke-width="1.2"/><rect x="9.5" y="13.5" width="11" height="3" rx="1.5" stroke="currentColor" stroke-width="1.2"/><path d="M3 16.5h18" stroke="currentColor" stroke-width="1"/></svg>'
+};
+const FALLBACK_ICON = '<svg viewBox="0 0 24 24" fill="none"><rect x="4" y="4" width="16" height="16" rx="3" stroke="currentColor" stroke-width="1.4"/><path d="M8 9h8M8 12h8M8 15h5" stroke="currentColor" stroke-width="1.1" opacity=".6"/></svg>';
+
 const techWrap = $("#techBadges");
 CONFIG.technologies.forEach((t, i) => {
   const b = document.createElement("span");
   b.className = "tech-badge";
-  b.textContent = t;
   b.style.animationDelay = (i % 7) * 0.4 + "s";
+  const icon = TECH_ICONS[t] || FALLBACK_ICON;
+  b.innerHTML = `<span class="tech-ico" aria-hidden="true">${icon}</span><span class="tech-label">${t}</span>`;
   techWrap.appendChild(b);
 });
 
@@ -246,7 +272,7 @@ const worksGrid = $("#worksGrid");
 /* Generated preview "canvases" (cheap, dependency-free) keyed by project kind */
 function buildPreview(kind) {
   const wrap = document.createElement("div");
-  wrap.className = "thumb-fallback";
+  wrap.className = "thumb-fallback pv-" + kind;
   wrap.dataset.kind = kind;
   // Each kind gets a distinct minimalist generated graphic via inline SVG
   const grads = {
@@ -405,7 +431,9 @@ if (!isTouch && !prefersReduced) {
     });
     requestAnimationFrame(pLoop);
   };
-  pLoop();
+  // Wait for the reveal animation to finish before hijacking the transform,
+  // otherwise the fade-up never plays.
+  setTimeout(() => pLoop(), 1000);
 }
 
 /* ---------------------------------------------------------------------
