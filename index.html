@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>An Lord — Custom Development & Digital Solutions</title>
+  <meta name="description" content="Разработка Minecraft-плагинов, Telegram-ботов и кастомных программных решений под задачи заказчика." />
+  <meta name="author" content="An Lord" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="assets/icons/favicon.svg" />
+
+  <!-- Fonts: Manrope (headings) + Inter (body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Manrope:wght@500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- Three.js (stable CDN, pinned version, exposes global THREE) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
+</head>
+<body>
+
+  <!-- Custom cursor (desktop only, hidden by CSS on touch devices) -->
+  <div class="cursor" aria-hidden="true"></div>
+  <div class="cursor-dot" aria-hidden="true"></div>
+
+  <!-- Background layers: grid, glow orbs, noise -->
+  <div class="bg-grid" aria-hidden="true"></div>
+  <div class="bg-orbs" aria-hidden="true">
+    <span class="orb orb-1"></span>
+    <span class="orb orb-2"></span>
+    <span class="orb orb-3"></span>
+  </div>
+  <div class="bg-noise" aria-hidden="true"></div>
+
+  <!-- Scroll progress bar -->
+  <div class="scroll-progress" aria-hidden="true"><span></span></div>
+
+  <!-- ===================== NAVBAR ===================== -->
+  <header class="navbar" id="navbar">
+    <div class="nav-inner">
+      <a href="#home" class="brand" data-name>
+        <img src="assets/icons/logo.svg" alt="" class="brand-logo" />
+        <span class="brand-name" data-name>An Lord</span>
+      </a>
+
+      <nav class="nav-links" id="navLinks">
+        <a href="#home" class="nav-link">Главная</a>
+        <a href="#services" class="nav-link">Услуги</a>
+        <a href="#works" class="nav-link">Работы</a>
+        <a href="#process" class="nav-link">Процесс</a>
+        <a href="#contact" class="nav-link">Контакты</a>
+      </nav>
+
+      <button class="hamburger" id="hamburger" aria-label="Открыть меню" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ===================== HERO ===================== -->
+  <section class="hero" id="home">
+    <div class="hero-inner">
+      <div class="hero-text">
+        <span class="eyebrow reveal">// CUSTOM SOFTWARE ENGINEER</span>
+        <h1 class="hero-title reveal">
+          Создаю цифровые<br />решения <span class="grad">под заказ</span>
+        </h1>
+        <p class="hero-sub reveal">
+          Minecraft-плагины • Telegram-боты • Автоматизация • Кастомные решения
+        </p>
+
+        <div class="hero-quote reveal" id="heroQuote" aria-live="polite">
+          «Код превращается в инструмент, который решает конкретную задачу.»
+        </div>
+
+        <div class="hero-actions reveal">
+          <a href="#works" class="btn btn-primary">Посмотреть работы</a>
+          <a href="#contact" class="btn btn-ghost">Заказать разработку</a>
+        </div>
+
+        <ul class="hero-stats reveal" id="heroStats"><!-- rendered from CONFIG.stats in script.js --></ul>
+      </div>
+
+      <!-- 3D scene container -->
+      <div class="hero-canvas-wrap reveal">
+        <canvas id="heroCanvas" aria-hidden="true"></canvas>
+        <div class="canvas-fallback" id="heroFallback" hidden>
+          <span class="mono">[ 3D scene ]</span>
+        </div>
+      </div>
+    </div>
+
+    <a href="#services" class="scroll-hint" aria-label="Прокрутить вниз">
+      <span></span>
+    </a>
+  </section>
+
+  <!-- ===================== SERVICES ===================== -->
+  <section class="section services" id="services">
+    <div class="section-head reveal">
+      <span class="section-tag">01 — Услуги</span>
+      <h2 class="section-title">Разработка под ваши задачи</h2>
+      <p class="section-lead">Не универсальные шаблоны, а решение, созданное под конкретную проблему.</p>
+    </div>
+
+    <div class="services-grid">
+      <!-- 01 -->
+      <article class="service-card reveal" data-tilt>
+        <div class="service-visual">
+          <div class="sv-mc">
+            <span class="mc-block"></span><span class="mc-block"></span><span class="mc-block"></span>
+            <span class="mc-particle"></span><span class="mc-particle"></span><span class="mc-particle"></span>
+          </div>
+          <pre class="sv-code mono">public class Plugin
+extends JavaPlugin {}</pre>
+        </div>
+        <span class="service-num">01</span>
+        <h3>Minecraft Plugins</h3>
+        <p>Разработка кастомных плагинов для Minecraft-серверов: механики, системы, мини-игры, античиты, интеграции и уникальные серверные решения.</p>
+        <div class="service-tags"><span>Java</span><span>Spigot</span><span>Paper</span></div>
+      </article>
+
+      <!-- 02 -->
+      <article class="service-card reveal" data-tilt>
+        <div class="service-visual">
+          <div class="tg-chat">
+            <div class="tg-msg out">Привет! Автоматизируй отчёты 📊</div>
+            <div class="tg-msg in">Готово. Настроил ежедневную рассылку ✅</div>
+            <div class="tg-bubble"><span class="tg-btn">Открыть панель</span></div>
+          </div>
+        </div>
+        <span class="service-num">02</span>
+        <h3>Telegram Bots</h3>
+        <p>Создание Telegram-ботов для автоматизации процессов, управления сервисами, уведомлений, магазинов, мониторинга и других задач.</p>
+        <div class="service-tags"><span>Python</span><span>Telegram API</span></div>
+      </article>
+
+      <!-- 03 -->
+      <article class="service-card reveal" data-tilt>
+        <div class="service-visual">
+          <div class="pipe">
+            <span class="node"></span><span class="link"></span>
+            <span class="node"></span><span class="link"></span>
+            <span class="node"></span><span class="link"></span>
+            <span class="node"></span>
+          </div>
+        </div>
+        <span class="service-num">03</span>
+        <h3>Automation</h3>
+        <p>Автоматизация рутинных процессов с помощью программных решений — от обработки данных до оркестрации сервисов.</p>
+        <div class="service-tags"><span>Python</span><span>Scripts</span></div>
+      </article>
+
+      <!-- 04 -->
+      <article class="service-card reveal" data-tilt>
+        <div class="service-visual">
+          <div class="custom-shape">
+            <svg viewBox="0 0 120 120" fill="none" aria-hidden="true">
+              <path d="M60 10 L108 36 V84 L60 110 L12 84 V36 Z" stroke="url(#g1)" stroke-width="1.5" fill="none"/>
+              <path d="M60 30 L88 46 V78 L60 94 L32 78 V46 Z" stroke="#22D3EE" stroke-width="1" opacity="0.6" fill="none"/>
+              <circle cx="60" cy="60" r="4" fill="#7C5CFF"/>
+            </svg>
+          </div>
+        </div>
+        <span class="service-num">04</span>
+        <h3>Custom Software</h3>
+        <p>Если готового решения не существует — создаю его с нуля под конкретную задачу, со всей необходимой архитектурой.</p>
+        <div class="service-tags"><span>Architecture</span><span>Full-stack</span></div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ===================== WORKS ===================== -->
+  <section class="section works" id="works">
+    <div class="section-head reveal">
+      <span class="section-tag">02 — Портфолио</span>
+      <h2 class="section-title">Некоторые из моих работ</h2>
+      <p class="section-lead">Примеры реальных задач и подходов к их решению.</p>
+    </div>
+
+    <!-- Project cards are rendered dynamically from script.js -->
+    <div class="works-grid" id="worksGrid"></div>
+  </section>
+
+  <!-- ===================== WHY ME ===================== -->
+  <section class="section why" id="why">
+    <div class="section-head reveal">
+      <span class="section-tag">03 — Подход</span>
+      <h2 class="section-title">Почему я</h2>
+    </div>
+
+    <div class="why-grid">
+      <article class="why-card reveal">
+        <div class="why-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2 2 7v10l10 5 10-5V7L12 2Z"/><path d="M12 22V12M2 7l10 5 10-5"/></svg>
+        </div>
+        <h3>Индивидуальная разработка</h3>
+        <p>Не использую универсальные шаблоны там, где требуется индивидуальное решение.</p>
+      </article>
+
+      <article class="why-card reveal">
+        <div class="why-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/><circle cx="11" cy="11" r="2.5"/></svg>
+        </div>
+        <h3>Внимание к деталям</h3>
+        <p>Прорабатываю не только функциональность, но и удобство использования.</p>
+      </article>
+
+      <article class="why-card reveal">
+        <div class="why-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8Z"/></svg>
+        </div>
+        <h3>Современный стек</h3>
+        <p>Использую актуальные технологии и инструменты разработки.</p>
+      </article>
+
+      <article class="why-card reveal">
+        <div class="why-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4L3 21l1.1-4A8.4 8.4 0 1 1 21 11.5Z"/></svg>
+        </div>
+        <h3>Прямое взаимодействие</h3>
+        <p>Клиент напрямую общается с разработчиком и может объяснить требования.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- ===================== PROCESS / TIMELINE ===================== -->
+  <section class="section process" id="process">
+    <div class="section-head reveal">
+      <span class="section-tag">04 — Процесс</span>
+      <h2 class="section-title">Как проходит работа</h2>
+    </div>
+
+    <ol class="timeline">
+      <li class="tl-item reveal">
+        <span class="tl-num">01</span>
+        <div class="tl-body"><h3>Обсуждение</h3><p>Клиент описывает задачу.</p></div>
+      </li>
+      <li class="tl-item reveal">
+        <span class="tl-num">02</span>
+        <div class="tl-body"><h3>Планирование</h3><p>Определяется архитектура и необходимые технологии.</p></div>
+      </li>
+      <li class="tl-item reveal">
+        <span class="tl-num">03</span>
+        <div class="tl-body"><h3>Разработка</h3><p>Создаётся программное решение.</p></div>
+      </li>
+      <li class="tl-item reveal">
+        <span class="tl-num">04</span>
+        <div class="tl-body"><h3>Тестирование</h3><p>Проверяется стабильность и исправляются ошибки.</p></div>
+      </li>
+      <li class="tl-item reveal">
+        <span class="tl-num">05</span>
+        <div class="tl-body"><h3>Передача</h3><p>Готовый проект передаётся клиенту.</p></div>
+      </li>
+    </ol>
+  </section>
+
+  <!-- ===================== CODE SECTION ===================== -->
+  <section class="section code-section">
+    <div class="code-layout">
+      <div class="code-copy reveal">
+        <span class="section-tag">05 — В коде</span>
+        <h2 class="section-title">От идеи до рабочего кода.</h2>
+        <p class="section-lead">Каждая строка пишется под задачу — без лишнего, но с запасом на развитие.</p>
+      </div>
+
+      <div class="terminal reveal" id="terminal">
+        <div class="term-bar">
+          <span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span>
+          <span class="term-title mono">CustomPlugin.java</span>
+        </div>
+        <pre class="term-body"><code id="typedCode" class="mono"></code><span class="caret" id="caret">▋</span></pre>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== 3D / GRAPHICS SECTION ===================== -->
+  <section class="section graphics" id="graphics">
+    <div class="graphics-inner">
+      <div class="graphics-text reveal">
+        <span class="section-tag">06 — Архитектура</span>
+        <h2 class="section-title">Система, а не набор файлов</h2>
+        <p class="section-lead">Узлы и связи, из которых собирается устойчивое программное решение. Двигайте мышью — сцена реагирует.</p>
+      </div>
+      <div class="graphics-canvas-wrap reveal">
+        <canvas id="graphCanvas" aria-hidden="true"></canvas>
+        <div class="canvas-fallback" id="graphFallback" hidden><span class="mono">[ network scene ]</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== TECHNOLOGIES ===================== -->
+  <section class="section tech">
+    <div class="section-head reveal">
+      <span class="section-tag">07 — Стек</span>
+      <h2 class="section-title">Технологии</h2>
+    </div>
+    <div class="tech-badges" id="techBadges"></div>
+  </section>
+
+  <!-- ===================== CTA ===================== -->
+  <section class="section cta" id="contact">
+    <div class="cta-inner reveal">
+      <svg class="cta-glow" viewBox="0 0 400 200" aria-hidden="true">
+        <defs>
+          <linearGradient id="gc" x1="0" y1="0" x2="400" y2="200" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#7C5CFF" stop-opacity="0.5"/>
+            <stop offset="1" stop-color="#22D3EE" stop-opacity="0.2"/>
+          </linearGradient>
+        </defs>
+        <path d="M0 150 C120 90 280 90 400 150" stroke="url(#gc)" stroke-width="1.5" fill="none"/>
+      </svg>
+      <h2 class="cta-title">Есть идея? Давайте превратим её в работающий проект.</h2>
+      <p class="cta-sub">Расскажите, что вам нужно — я предложу способ реализации.</p>
+      <div class="cta-actions">
+        <a href="#" class="btn btn-primary" id="ctaTelegram">Написать в Telegram</a>
+        <a href="#" class="btn btn-ghost" id="ctaGithub">Посмотреть GitHub</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <span class="brand-name" data-name>An Lord</span>
+        <span class="footer-tag">Custom development &amp; digital solutions</span>
+      </div>
+      <nav class="footer-links">
+        <a href="#" id="footerGithub">GitHub</a>
+        <a href="#" id="footerTelegram">Telegram</a>
+      </nav>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 All rights reserved.</span>
+    </div>
+  </footer>
+
+  <!-- ===================== PROJECT MODAL ===================== -->
+  <div class="modal" id="projectModal" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="modal-backdrop" data-close></div>
+    <div class="modal-window" role="document">
+      <button class="modal-close" data-close aria-label="Закрыть">✕</button>
+      <div class="modal-content" id="modalContent"><!-- filled by JS --></div>
+    </div>
+  </div>
+
+  <!-- Hidden SVG gradient defs reused across inline SVGs -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <linearGradient id="g1" x1="0" y1="0" x2="120" y2="120" gradientUnits="userSpaceOnUse">
+        <stop stop-color="#7C5CFF"/><stop offset="1" stop-color="#3DA8FF"/>
+      </linearGradient>
+    </defs>
+  </svg>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
