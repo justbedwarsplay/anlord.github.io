@@ -29,8 +29,10 @@ const CONFIG = {
 
   // Technology badges
   technologies: [
-    "Java", "Python", "JavaScript", "HTML", "CSS", "Three.js",
-    "Spigot", "Paper", "PacketEvents", "Telegram API", "PyTorch", "Git", "GitHub"
+    "Java", "Kotlin", "Python", "C", "C++", "Rust",
+    "JavaScript", "HTML", "CSS", "Three.js",
+    "Spigot", "Paper", "PacketEvents", "Telegram API",
+    "PyTorch", "Git", "GitHub", "Gradle", "Docker"
   ],
 
   // Projects shown in the "Works" grid + modal.
