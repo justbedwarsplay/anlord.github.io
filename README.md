@@ -45,7 +45,7 @@ const CONFIG = {
 ```js
 contacts: {
   telegram: "https://t.me/anlord",
-  github:   "https://github.com/anlord"
+  github:   "https://github.com/justbedwarsplay"
 }
 ```
 
@@ -64,7 +64,7 @@ projects: [
     solution: "Как решили…",
     technologies: ["Java", "Spigot", "PacketEvents"],
     results: "Что получили…",
-    link: "https://github.com/anlord"  // ссылка на GitHub проекта
+    link: "https://github.com/justbedwarsplay"  // ссылка на GitHub проекта
   },
   ...
 ]

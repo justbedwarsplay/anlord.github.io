@@ -47,7 +47,7 @@ const CONFIG = {
       solution: "Написал кастомный движок на основе PacketEvents: отслеживание аномалий движения, скорости и взаимодействий с плавной системой баллов и апелляций.",
       technologies: ["Java", "Spigot", "PacketEvents"],
       results: "Снижение числа читеров на 90% при минимальных ложных банах.",
-      link: "https://github.com/anlord"
+      link: "https://github.com/justbedwarsplay"
     },
     {
       title: "Custom Minecraft Plugin",
@@ -57,7 +57,7 @@ const CONFIG = {
       solution: "Спроектировал модульную архитектуру с собственными событиями, конфигурами и API для дальнейшего расширения.",
       technologies: ["Java", "Spigot/Paper"],
       results: "Гибкая система, легко настраиваемая под будущие обновления сервера.",
-      link: "https://github.com/anlord"
+      link: "https://github.com/justbedwarsplay"
     },
     {
       title: "Telegram Monitoring Bot",
@@ -67,7 +67,7 @@ const CONFIG = {
       solution: "Бот с подписками, фильтрами и расписанием рассылки; интеграция с API источников и очередью сообщений.",
       technologies: ["Python", "Telegram API"],
       results: "Время реакции на инциденты сокращено с часов до секунд.",
-      link: "https://github.com/anlord"
+      link: "https://github.com/justbedwarsplay"
     },
     {
       title: "Automation Bot",
@@ -77,7 +77,7 @@ const CONFIG = {
       solution: "Сценарии автоматизации с удобными кнопками, логами и правами доступа прямо в чате.",
       technologies: ["Python", "Telegram API", "Scripts"],
       results: "Рутинные задачи полностью переданы боту, освободив десятки часов в месяц.",
-      link: "https://github.com/anlord"
+      link: "https://github.com/justbedwarsplay"
     },
     {
       title: "Blockchain Project",
@@ -87,7 +87,7 @@ const CONFIG = {
       solution: "Реализовал консенсус, передачу сообщений и хранение цепочки блоков с наблюдаемой телеметрией.",
       technologies: ["Python", "JavaScript", "Networking"],
       results: "Работающий прототип сети из нескольких узлов.",
-      link: "https://github.com/anlord"
+      link: "https://github.com/justbedwarsplay"
     },
     {
       title: "AI / ML Project",
@@ -97,7 +97,7 @@ const CONFIG = {
       solution: "Пайплайн обучения на PyTorch, упаковка модели и интеграция через лёгкий API-сервис.",
       technologies: ["Python", "PyTorch", "Hugging Face"],
       results: "Модель достигает целевой точности и обслуживается в продакшене.",
-      link: "https://github.com/anlord"
+      link: "https://github.com/justbedwarsplay"
     }
   ]
 };
