@@ -1,5 +1,5 @@
 /* =====================================================================
-   An Lord — Developer Portfolio
+   Anlord033 — Developer Portfolio
    Vanilla JS + Three.js (no backend, GitHub-Pages friendly)
 
    ALL user-editable content lives in the CONFIG block below.
@@ -11,12 +11,12 @@
    --------------------------------------------------------------------- */
 const CONFIG = {
   // Developer identity
-  name: "An Lord",
+  name: "anlord033",
 
   // Contact links (used in CTA + footer + navbar anchors)
   contacts: {
-    telegram: "https://t.me/anlord",
-    github:   "https://github.com/anlord"
+    telegram: "https://t.me/anlord033",
+    github:   "https://github.com/justbedwarsplay"
   },
 
   // Hero animated stats (data-target is the final number)

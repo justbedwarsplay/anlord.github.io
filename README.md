@@ -1,4 +1,4 @@
-# An Lord — Developer Portfolio
+# anlord033 — Developer Portfolio
 
 Премиальный статический сайт-портфолио разработчика (Minecraft-плагины, Telegram-боты, автоматизация и кастомные решения). Полностью статический — работает на **GitHub Pages** без бэкенда.
 
@@ -35,7 +35,7 @@
 
 ```js
 const CONFIG = {
-  name: "An Lord",
+  name: "anlord033",
   ...
 }
 ```
