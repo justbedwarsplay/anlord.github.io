@@ -1,134 +1,126 @@
 # anlord033 — Developer Portfolio
 
-Премиальный статический сайт-портфолио разработчика (Minecraft-плагины, Telegram-боты, автоматизация и кастомные решения). Полностью статический — работает на **GitHub Pages** без бэкенда.
+Премиальный статический сайт-портфолио разработчика: Minecraft-плагины, Telegram-боты,
+автоматизация и кастомные программные решения. Полностью статичен — работает на
+**GitHub Pages** без бэкенда, баз данных и серверного кода.
 
-## Технологии
+> **Живой сайт:** https://justbedwarsplay.github.io/
+> **Контакты:** [Telegram @anlord033](https://t.me/anlord033) · [GitHub](https://github.com/justbedwarsplay)
 
-- **HTML5** + семантичная разметка
-- **CSS3** — glassmorphism, glow, градиенты, адаптивная сетка
-- **Vanilla JavaScript** — без сборщиков и фреймворков
-- **Three.js** (через CDN `unpkg`) — 3D-сцена в Hero и блок «архитектура»
-- **SVG** — иконки, логотип, генерируемые превью проектов
-- WebGL-частицы, `IntersectionObserver`, `requestAnimationFrame`
+---
+
+## Стек
+
+| Слой | Технологии |
+|------|-----------|
+| Разметка | HTML5 (семантика), SVG (иконки, логотип, генерируемые превью) |
+| Стили | CSS3 — glassmorphism, glow, градиенты, адаптивная сетка на CSS-переменных |
+| Логика | Vanilla JavaScript (без сборщиков и фреймворков) |
+| 3D / графика | Three.js (CDN), WebGL-частицы |
+| API браузера | `IntersectionObserver`, `requestAnimationFrame`, `matchMedia` |
+| Языки | Java, Kotlin, Python, C, C++, Rust, JavaScript |
+| Платформа | Spigot, Paper, PacketEvents, Telegram API, PyTorch, Gradle, Docker |
+
+---
 
 ## Структура
 
 ```
-/
-├── index.html        # вся разметка секций
+portfolio/
+├── index.html        # разметка всех секций
 ├── style.css         # дизайн-система (CSS-переменные)
-├── script.js         # логика + ВСЁ редактируемое содержимое (CONFIG)
+├── script.js         # логика + ВСЁ редактируемое содержимое (объект CONFIG)
 ├── assets/
 │   ├── icons/
 │   │   ├── logo.svg
 │   │   └── favicon.svg
-│   └── images/       # (опционально: изображения проектов)
+│   └── images/       # опционально: картинки проектов
 └── README.md
 ```
 
+---
+
 ## Как редактировать содержимое
 
-Всё, что видит клиент (имя, контакты, проекты, технологии, статистика), вынесено в
-объект `CONFIG` в начале `script.js`. Не нужно трогать логику.
-
-### Имя разработчика
+Всё, что видит посетитель (имя, контакты, проекты, технологии, статистика), вынесено в
+объект `CONFIG` в начале `script.js`. Логику трогать не нужно.
 
 ```js
 const CONFIG = {
-  name: "anlord033",
-  ...
-}
+  name: "anlord033",                       // имя разработчика (везде на сайте)
+  contacts: {
+    telegram: "https://t.me/anlord033",   // CTA + футер
+    github:   "https://github.com/justbedwarsplay"
+  },
+  stats: [ { label: "Custom Development", value: 40 }, /* … */ ],
+  technologies: ["Java", "Kotlin", "Python", "C", "C++", "Rust", /* … */ "Docker"],
+  projects: [ /* см. ниже */ ]
+};
 ```
-
-### Контакты (Telegram / GitHub)
-
-```js
-contacts: {
-  telegram: "https://t.me/anlord",
-  github:   "https://github.com/justbedwarsplay"
-}
-```
-
-Эти ссылки автоматически подставляются в CTA-кнопки и футер.
 
 ### Проекты
 
-```js
-projects: [
-  {
-    title: "Minecraft Anti-Cheat",
-    kind: "minecraft",                 // стиль сгенерированного превью:
-                                      // minecraft | telegram | automation | network | ai
-    description: "Краткое описание…",
-    task: "Что нужно было решить…",
-    solution: "Как решили…",
-    technologies: ["Java", "Spigot", "PacketEvents"],
-    results: "Что получили…",
-    link: "https://github.com/justbedwarsplay"  // ссылка на GitHub проекта
-  },
-  ...
-]
-```
-
-> **Важно:** здесь указывайте только реальные проекты. Превью генерируется
-> автоматически по полю `kind`; если хотите свою картинку — добавьте поле
-> `image: "assets/images/foo.png"` и подключите его в разметке карточки.
-
-### Технологии
+Каждый проект — объект в массиве `CONFIG.projects`. Превью генерируется автоматически
+по полю `kind` (`minecraft` · `telegram` · `automation` · `network` · `ai`).
 
 ```js
-technologies: ["Java", "Python", "JavaScript", /* … */ "GitHub"]
+{
+  title: "Minecraft Anti-Cheat",
+  kind: "minecraft",
+  description: "Краткое описание карточки.",
+  task: "Что нужно было решить.",
+  solution: "Как решили.",
+  technologies: ["Java", "Spigot", "PacketEvents"],
+  results: "Что получили в итоге.",
+  link: "https://github.com/justbedwarsplay"  // ссылка на GitHub проекта
+}
 ```
 
-### Hero-статистика
+> Указывайте только реальные проекты. Чтобы использовать свою картинку вместо
+> сгенерированного превью, добавьте поле `image: "assets/images/foo.png"`.
 
-```js
-stats: [
-  { label: "Custom Development", value: 40 },
-  ...
-]
-```
+---
 
-## Локальный запуск (для проверки)
+## Локальный запуск
 
-Любой статический сервер. Например, через Python:
+Любой статический сервер. Через Python:
 
 ```bash
 # из папки проекта
 python -m http.server 8000
-# откройте http://localhost:8000
+# открыть http://localhost:8000
 ```
 
-Или просто откройте `index.html` в браузере (3D через CDN требует интернета).
+Или просто откройте `index.html` в браузере (3D грузится с CDN, нужен интернет).
+
+---
 
 ## Публикация на GitHub Pages
 
-1. Создайте репозиторий на GitHub (например, `portfolio`) и загрузите в него
-   `index.html`, `style.css`, `script.js`, папку `assets/` и `README.md`.
-2. В репозитории перейдите в **Settings → Pages**.
-3. В разделе **Build and deployment**:
+1. Загрузите файлы (`index.html`, `style.css`, `script.js`, `assets/`, `README.md`) в корень репозитория.
+2. **Settings → Pages → Build and deployment**:
    - **Source:** `Deploy from a branch`
-   - **Branch:** выберите `main` (или `master`) и папку `/ (root)`
-   - Нажмите **Save**.
-4. Через 1–2 минуты сайт будет доступен по адресу:
-   `https://<ваш-username>.github.io/<имя-репозитория>/`
-
-### Если репозиторий — это `<username>.github.io`
-
-Этот домен публикует ветку `main` из корня автоматически; адрес:
-`https://<username>.github.io/`
+   - **Branch:** `main`, папка `/ (root)`
+   - **Save**.
+3. Через 1–2 минуты сайт доступен по адресу:
+   - для репозитория `<username>.github.io` → `https://<username>.github.io/`
+   - для обычного репозитория → `https://<username>.github.io/<repo>/`
 
 ### Кастомный домен (опционально)
 
-В **Settings → Pages** укажите свой домен и добавьте `CNAME` в корень репозитория.
+В **Settings → Pages** укажите свой домен; GitHub создаст файл `CNAME` в корне.
+
+---
 
 ## Производительность и доступность
 
 - Количество частиц и сложность 3D автоматически снижаются на мобильных
   (`perfTier` low/med/high в `script.js`).
-- Уважается `prefers-reduced-motion` — отключаются тяжёлые анимации.
-- Адаптив под 1920×1080, 1440×900, 1280×720, планшеты и смартфоны.
+- Уважается `prefers-reduced-motion` — тяжёлые анимации отключаются.
+- Адаптив: 1920×1080, 1440×900, 1280×720, планшеты, смартфоны (hamburger-меню).
 - Сцены Three.js откатываются к текстовому плейсхолдеру при ошибке WebGL.
+
+---
 
 ## Лицензия
 
